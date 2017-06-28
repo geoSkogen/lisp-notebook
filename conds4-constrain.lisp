@@ -1,0 +1,6 @@
+(defun constrain (miny maxy y)
+  (cond ((> y maxy) maxy)
+        ((< y miny) miny)
+        (t y)
+  )
+)

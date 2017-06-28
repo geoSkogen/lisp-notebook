@@ -1,0 +1,6 @@
+(defun mycompare (x y)
+  (cond ((equal x y) 'equality)
+        ((> x y) 'first-input-greater)
+        ((< x y) 'second-input-greater)
+  )
+)
