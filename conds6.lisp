@@ -4,7 +4,6 @@
                (t 'wackbathrooms)
          )
         )
-
         ((equal age 'child)
          (cond ((or (equal gen 'boy) (equal gen 'girl)) 'boygirl)
                (t 'wackbathrooms)

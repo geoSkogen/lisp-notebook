@@ -17,8 +17,8 @@
   (print greatest)
   (loop for intagain in intlist do
     (setq storeresttotal resttotal)
-    (if (not (equal intagain greatest)) (setq restttotal (+ storeresttotal intagain)))
+    (if (not (equal intagain greatest)) (setq resttotal (+ storeresttotal intagain)))
   )
   (print "resttotal:")
-  (print restttotal)
+  (print resttotal)
 )
