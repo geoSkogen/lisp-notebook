@@ -7,4 +7,9 @@
 ;(let ((one 2) (two 2) (three 3))
 ;(+ one two three))
 
-((lambda (x) (let ((sum (+ x x)) (product (* x x))) (values sum product))) 10)
+;((lambda (x) (let ((sum (+ x x)) (product (* x x))) (values sum product))) 10)
+
+(defun avgtwo (x y)
+  (let ((sum (+ x y)))
+  (/ sum 2))
+)
