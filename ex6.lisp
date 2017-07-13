@@ -1,0 +1,27 @@
+(setf nerdstates (list 'sleeping 'eating 'waiting 'coding 'debugging))
+(setf cafnerd nil)
+
+(defun reporterror (flagin)
+  (cond ((equal flagin 'caf) (setf cafnerd t))
+        ((equal flagin 'decaf) (setf cafnerd nil))
+        (t (setf errrept (list 'that 'was 'not 'a 'nerdstate)))
+  )
+)
+
+
+(defun nextnerdstate (statein)
+  (if (equal cafnerd nil)
+    (if (equal (length (member statein nerdstates)) 1)
+        (nth 0 nerdstates)
+        (first (rest (member statein nerdstates)))
+    )
+    (if (equal (length (member statein nerdstates)) 1)
+        (nth 1 nerdstates)
+        (first (rest (rest (member statein nerdstates))))
+    )
+  )
+)
+
+(defun nerding (stringin)
+  (if (member stringin nerdstates) (nextnerdstate stringin) (reporterror stringin))
+)
