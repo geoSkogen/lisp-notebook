@@ -58,11 +58,13 @@
 
 (setf currentroom 'grey-room)
 (setf currentobj 'none)
-(setf encountering 'none)
 (setf storedir 'none)
-(setf foundobject 'none)
 (setf gear nil)
 (setf unlocked nil)
+
+(setf encountering 'none)
+(setf foundobject 'none)
+
 (setf encadj 'none)
 (setf encnoun 'none)
 (setf objadj 'none)
@@ -175,3 +177,20 @@
   ;choose between finding an object or having an encounter
   (if (equal (length this) 2) (findobject this) '(zappa))
 )
+
+(defun rainbowhelp ()
+  (write-line "~")
+  (write-line "R A I N B O W R O O M")
+  (write-line "")
+  (write-line "RAINBOWROOM COMMANDS:")
+  (write-line "")
+  (write-line "(whichroom) -- a reminder of which room you're in")
+  (write-line "(move *direction*) -- to move west, for example, type (move west)")
+  (write-line "(enter) -- enter a door or stairwell")
+  (write-line "(checkitout) -- inpsect an object you've just found")
+  (write-line "(take) -- take an object you've just found")
+  (write-line "(rainbowhelp) -- view these commands again")
+  (write-line "")
+)
+
+(rainbowhelp)
