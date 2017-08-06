@@ -1,5 +1,10 @@
+(setf mypath "c\:\/users\/geoseph\/lisp_files\/")
+
 (defun lispload (invalue)
-  (defvar mypath "c\:\/users\/geoseph\/documents\/my_git_repos\/lisp-notebook\/lisp-notebook\/")
-  (defvar fullpath (concatenate 'string mypath invalue "\.lisp"))
+  (setf fullpath (concatenate 'string mypath invalue "\.lisp"))
   (load fullpath)
+)
+
+(defun my-new-path-is (invalue)
+ (setf mypath invalue)
 )
