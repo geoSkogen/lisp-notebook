@@ -1,0 +1,6 @@
+(defun oilboil ()
+(with-output-to-string (out)
+  (with-input-from-string (in "\"Come to the Oil Boil, Bernard\"")
+    (let ((io (make-two-way-stream in out)))
+      (format io "~A, and we'll all be boiled in oil." (read io)))))
+)
