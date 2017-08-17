@@ -45,10 +45,11 @@
 )
 
 (defun getkey ()
-  (if (equal currentkey 'unset) chromatic (calckey))
+  (if (equal currentkey 'unset) chromatic (transposer))
 )
 
-(defun calckey ()
+;notice how this transposer is so much more awkward than the one below
+(defun *old*transposer ()
   (setf thischromatic ())
   (setf i 1)
   (setf lookup i)
@@ -60,6 +61,19 @@
     (if (> lookup (- (length chromatic) offset)) (setf lookup (- lookup (length chromatic))))
     (setf newcons (cons i (cdr (assoc (+ lookup offset) chromatic))))
     (setf thischromatic (append thischromatic (list newcons)))
+  )
+  thischromatic
+)
+
+(defun transposer ()
+  (setf thischromatic nil)
+  (setf i 1)
+  (loop for elm from i to (length chromatic)
+    do
+    (setf lookup (+ i offset))
+    (if (> lookup (length chromatic)) (setf lookup (- lookup (length chromatic))))
+    (setf thischromatic (append thischromatic (list (cons i (cdr (assoc lookup chromatic))))))
+    (incf i)
   )
   thischromatic
 )
