@@ -42,6 +42,17 @@
  )
 )
 
+
+(defun modechange (mode)
+  (if (numberp mode)
+    (if (> mode (length modes)) (format t "~A is out of range." mode)
+    (transmoder (nth (- mode 1) modes) thisionian))
+    (if (not (member mode modes)) (format t "~A is not a known mode." mode)
+      (transmoder mode thisionian)
+    )
+  )
+)
+
 (defun keychange (tonic)
   (if (equal nil (rassoc tonic chromatic))
     (format t "~A is not a known pitch." tonic)
@@ -102,19 +113,8 @@
   ionian
 )
 
-(defun modechange (mode)
-  (if (numberp mode)
-    (if (> mode (length modes)) (format t "~A is out of range." mode)
-    (transmoder (nth (- mode 1) modes) thisionian))
-    (if (not (member mode modes)) (format t "~A is not a known mode." mode)
-      (transmoder mode thisionian)
-    )
-  )
-)
-
 (defun transmoder (mode alist)
   (setf moffset (indexof mode modes))
-  ;(setf hometone (cdr (nth homeindex alist)))
   (setf currentmode mode)
   (setf thismode (transposer alist moffset))
   thismode
