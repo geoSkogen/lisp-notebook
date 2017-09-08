@@ -17,3 +17,8 @@
       )
     listin)
 )
+
+(defun thecount (listarg)
+	(length (remove-if-not #'(lambda (symb) (equal 'the symb)) listarg))
+)
+
