@@ -27,18 +27,19 @@
 )
 
 (defun shuffle ()
+  (setf deck nil)
   (makedeck ranks suits)
 )
 
 (defun makedeck (ranks suits)
-	(setf newsuit nil)
-	(setf newcons 'none)
-	(loop for suit in suits do
-      (setf newsuit nil)	
-	  (loop for rank in ranks do
-		(setf newcons (cons rank (list suit)))
-		(setf newsuit (append newsuit (list newcons)))
-	  )
+  (setf newsuit nil)
+  (setf newcons 'none)
+  (loop for suit in suits do
+    (setf newsuit nil)	
+	(loop for rank in ranks do
+	  (setf newcons (cons rank (list suit)))
+	  (setf newsuit (append newsuit (list newcons)))
+	)
 	  (setf deck (append deck (list newsuit)))
 	)
 	deck
@@ -61,19 +62,19 @@
 )
 
 (defun go-dealhand (n) 
-     (setf card "none")
-	 (setf r -1)
-	 (setf s -1)
-     (setf hand nil)
-     (loop for i from 1 to n do 
-	    (setf r (random 13))
-		(setf s (random 4))
-	    (setf card (nth r (nth s deck)))
-		(setf (nth s deck) (remove card (nth s deck) :test #'equal))
-        (setf hand (append hand (list card)))		
-	 )
-	 hand
-   )
+  (setf card "none")
+  (setf r -1)
+  (setf s -1)
+  (setf hand nil)
+  (loop for i from 1 to n do 
+    (setf s (random (length deck)))
+	(setf r (random (length (nth s deck))))
+	(setf card (nth r (nth s deck)))
+	(setf (nth s deck) (remove card (nth s deck) :test #'equal))
+    (setf hand (append hand (list card)))		
+  )	
+  hand
+)
 
 
 
