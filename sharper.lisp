@@ -76,5 +76,16 @@
   hand
 )
 
+(defun colorcards (colorarg hand)
+  (setf cardsofcolor nil)
+  (loop for card in hand do
+	(if (equal colorarg (getcolor (car card) (cadr card)))
+      (setf cardsofcolor (append cardsofcolor (list card)))
+	  nil
+	)
+  )
+  cardsofcolor	 
+)
+
 
 
