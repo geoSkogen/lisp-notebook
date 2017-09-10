@@ -76,6 +76,20 @@
   hand
 )
 
+()
+
+;find out how to write a function which accepts a proc as an argument
+(defun selectby (arg hand **your-function-here**)
+  (setf selectedcards nil)
+  (loop for card in hand do 
+    (if (equal arg (**your-function-here** (car card) (cadr card)))
+	  (setf selectedcards (append selectedcards (list card)))
+	  nil
+	)  
+  )
+  selectedcards
+)
+
 (defun colorcards (colorarg hand)
   (setf cardsofcolor nil)
   (loop for card in hand do
@@ -87,5 +101,28 @@
   cardsofcolor	 
 )
 
+(defun getranks (suitarg hand)
+  (setf cardsofsuit nil)
+  (loop for card in hand do 
+    (if (equal suitarg (getsuit (car card) (cadr card)))
+	  (setf cardsofsuit (append cardsofsuit (list card)))
+	  nil
+	)
+  )
+  cardsofsuit  
+)
 
+(defun highcard (hand)
+  
+)
 
+(defun getgreatest (intlist)
+  (loop for int in intlist do
+    (setq track 0)
+    (loop for other in intlist do
+      (if (> int other) (incf track))
+    )
+    (if (equal track (- (length intlist) 1)) (setq greatest int))
+  )
+  greatest  
+ )  
