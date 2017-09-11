@@ -18,6 +18,7 @@
 (setf colors '(black black red red))
 
 (setf deck nil)
+(setf tallyobj nil)
 
 (defun indexof (thisin listin)
  (if (member thisin listin)
@@ -113,16 +114,43 @@
 )
 
 (defun highcard (hand)
-  
+  (setf rankints nil)
+  (loop for card in hand do 
+    (setf rankints (append rankints (list (+ (indexof (car card) ranks) 1))))
+  ) 
+  (getgreatest rankints)
 )
 
 (defun getgreatest (intlist)
-  (loop for int in intlist do
-    (setq track 0)
-    (loop for other in intlist do
-      (if (> int other) (incf track))
-    )
-    (if (equal track (- (length intlist) 1)) (setq greatest int))
-  )
-  greatest  
+   (setf track 0)
+   (setf greatest nil)
+   (loop for int in intlist do
+     (setf track 0)
+     (loop for other in intlist do
+       (if (> int other) (incf track))
+     )
+     (if (equal track (- (length intlist) 1)) (setf greatest int) ())
+   )
+   (if (equal greatest nil) (setf greatest (ranktally intlist)) ())
+   greatest
  )  
+ 
+ (defun ranktally (intlist) 
+   (setf i 0)
+   (setf tallyobj nil)
+   (loop for int in intlist do 
+     (setf i 0)
+     (loop for other in intlist do 
+	   (if (equal other int) (tallyme int (incf i)) ())
+	 )
+   )
+   tallyobj
+ )
+ 
+ (defun tallyme (int i)
+  (if (equal (assoc int tallyobj) nil) 
+    (setf tallyobj (append tallyobj (list (list int i))))
+	(setf (nth (indexof (assoc int tallyobj) tallyobj) tallyobj) (list int i))
+  )	
+ )
+ 
