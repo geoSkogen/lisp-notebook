@@ -25,3 +25,7 @@
   )
   result
 )
+
+(defun just-say-yes (thislist)
+  (mapcar #'(lambda (arg) (if (not (equal 'yes arg)) 'yes arg)) thislist)
+) 
