@@ -7,4 +7,47 @@
 )
 )
 
-(
+(setf db database1)
+
+(defun fetch (args) 
+ (if (listp args)
+   (if (not (wrongsize args))
+     (initfetch args)
+	 (format nil "fetch argument contained TOO ~A data" (wrongsize args))
+	) 
+   (format nil "fetch only accepts a list as its argument" nil)
+ ) 
+)
+
+(defun wrongsize (arglist)
+  (cond ((> (length arglist) (length (car db))) 'many)
+        ((< (length arglist) (length (car db))) 'few)
+        (t nil)		
+  )
+)
+
+(defun initfetch (arglist)
+  (setf queries nil)
+  (setf asserts nil)
+  (setf i 0)
+  (loop for arg in arglist do 
+    (if (equal arg '?) 
+	  (setf queries (append queries (list i))) 
+	  (setf asserts (append asserts (list i))) 
+	)
+	(incf i)
+  )
+  (routegetdata queries asserts arglist)
+)
+
+(defun routegetdata (qs as args)
+  (cond ((equal (length as) 0) (matchnone qs as args))		
+        ((equal (length as) 1) (matchone qs as args))
+        ((equal (length as) 2) (matchtwo qs as args))
+        ((equal (length as) 3) (matchthree qs as args))
+  )
+)
+
+(defun matchnone (qs as args)
+  
+)
